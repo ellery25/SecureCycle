@@ -1,10 +1,15 @@
 from flask import Flask, redirect, request, jsonify, json, session, render_template
 
 from config.bd import app, db
+
 from models.Usuarios import Usuario, UsuarioSchema
+from models.Rutas import Rutas, RutasSchema
 
 usuarios_schema = UsuarioSchema()
-usuarios_schema = UsuarioSchema(many= True)
+usuarios_schema = UsuarioSchema(many = True)
+
+rutas_schema = RutasSchema()
+rutas_schema = RutasSchema(many = True)
 
 @app.route('/', methods=['GET'])
 def index():
