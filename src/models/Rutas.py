@@ -13,7 +13,7 @@ class Rutas(db.Model):
         self.latitud = latitud
         self.longitud = longitud
 
-with app.app_context:
+with app.app_context():
     db.create_all()
 
 class RutasSchema(ma.Schema):

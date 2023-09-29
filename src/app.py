@@ -26,8 +26,20 @@ def index():
 
 @app.route('/ingresar', methods=['POST'])
 def ingresar():
-    
-    return 'algo'
+    email = request.form['email']
+    password = request.form['password']
+    user = db.session.query(Usuario.id).filter(Usuario.Email == email, Usuario.Password == password).all()
+    resultado = usuarios_schema.dump(user)
 
+    if len(resultado)>0:
+        session['email'] = email
+        return redirect('/HomePage')
+    else:
+        return redirect('/')
+    
+@app.route('/HomePage', methods=['GET'])
+def HomePage():
+    
+    return render_template('HomePage.html', usuario = session('usuario'))
 if __name__ == "__main__":
     app.run(debug=True)

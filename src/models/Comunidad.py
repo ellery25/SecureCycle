@@ -3,7 +3,7 @@ from config.bd import db, ma, app
 class Comunidad(db.Model):
     __tablename__ = "Comunidad"
 
-    id_comunidad = db.Column(db.integer, primary_key = True)
+    id_comunidad = db.Column(db.Integer, primary_key = True)
     nombre = db.Column(db.String(20))
     
     def __init__ (self, nombre):
