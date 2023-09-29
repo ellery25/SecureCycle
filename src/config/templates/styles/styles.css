@@ -1,0 +1,93 @@
+
+body{
+    font-family: 'Arimo', sans-serif;
+}
+
+.navbar-brand{
+    font-weight: bold;
+}
+
+.introduction{
+    padding-top: 15vh;
+    color: black;
+}
+
+.container-img{
+    width: 50vh;
+    margin: 0;
+}
+
+.introduction-img{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: 25vw;
+}
+
+.introduction-section{
+    height: 100vh;
+}
+
+.subtitle{
+    font-weight: bold;
+    color: #243E36;
+}
+
+.introduction-text{
+    width: 50vw;
+    font-size: 18px;
+}
+
+.maps-section{
+    padding-top: 10vh;
+    height: 100vh;
+}
+
+.map-img{
+    margin-top: 15vh;
+    width: 50vw;
+}
+
+.button-explore{
+    margin-top: 30px;
+    background-color: #243E36;
+    color: white;
+    border: #243E36;
+}
+
+.button-explore:hover{
+    background-color: #1c302a;
+    color: white;
+}
+
+.map-text{
+    padding-top: 17vh;
+}
+
+.alerts-section{
+    height: 100vh;
+    padding-top: 10vh;
+}
+
+.alert-img{
+    margin-top: 15vh;
+    width: 50vw;
+}
+
+.comunity-section{
+    height: 100vh;
+    padding-top: 10vh;
+}
+
+.comunity form{
+    padding-top: 15vh;
+    width: 30vw;
+}
+
+.comunity-img{
+    padding-top: 10vh;
+    width: 25vw;
+}
+
+.btnLogin{
+    margin-right: 5px;
+}

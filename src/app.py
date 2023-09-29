@@ -24,5 +24,10 @@ def index():
     
     return render_template("login.html")
 
+@app.route('/ingresar', methods=['POST'])
+def ingresar():
+    
+    return 'algo'
+
 if __name__ == "__main__":
     app.run(debug=True)
