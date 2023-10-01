@@ -22,6 +22,9 @@ comunidad_schema = ComunidadSchema(many = True)
 comments_schema = CommentsSchema()
 comments_schema = CommentsSchema(many = True)
 
+app.static_url_path = '/static'
+app.static_folder = 'static'
+
 @app.route('/', methods=['GET'])
 def index():
     
