@@ -7,6 +7,9 @@ from models.Rutas import Rutas, RutasSchema
 from models.Comunidad import Comunidad, ComunidadSchema
 from models.Comments import Comments, CommentsSchema
 
+app.static_url_path = '/static'
+app.static_folder = 'static'
+
 usuarios_schema = UsuarioSchema()
 usuarios_schema = UsuarioSchema(many = True)
 
@@ -22,7 +25,7 @@ comments_schema = CommentsSchema(many = True)
 @app.route('/', methods=['GET'])
 def index():
     
-    return render_template("login.html")
+    return render_template("HomePage.html")
 
 @app.route('/ingresar', methods=['POST'])
 def ingresar():
