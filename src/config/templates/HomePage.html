@@ -4,8 +4,8 @@
   <header class="p-3 text-bg-dark">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <img src="images/bike-icon.png" width="50" height="50" alt="logo">
+        <a href="{{ url_for('index') }}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <img src="{{ url_for('static', filename='images/bike-icon.png') }}" width="50px" height="50px" alt="Mi imagen">
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -17,8 +17,8 @@
         </ul>
 
         <div class="text-end">
-          <a href="login.html"><button type="button" class="btn btn-outline-light me-2">Login</button></a>
-          <button type="button" class="btn btn-primary">Sign-up</button>
+          <a  href="{{ url_for('login') }}"><button type="button" class="btn btn-outline-light me-2">Login</button></a>
+          <a href="{{ url_for('sign_up') }}"><button type="button" class="btn btn-primary">Sign-up</button></a>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
     <div class="container col-xxl-8 px-4 py-5">
       <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
         <div class="col-10 col-sm-8 col-lg-6">
-          <img src="images/introductionImg.jpeg" style="border-radius: 10px;" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+          <img src="{{ url_for('static', filename='images/introductionImg.jpeg') }}" style="border-radius: 10px;" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
         </div>
         <div class="col-lg-6">
           <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Recorre tu camino más seguro</h1>
@@ -43,17 +43,17 @@
       <h2 class="pb-2 border-bottom">Conoce a la Comunidad</h2>
       <div class="row g-4 py-5 row-cols-1 row-cols-lg-3" style="margin: 5%;">
         <div class="feature col">
-          <img src="images/searchIcon.png" width="50px" height="50px"></img>
+          <img src="{{ url_for('static', filename='images/searchIcon.png') }}" width="50px" height="50px"></img>
           <h3 class="fs-2 text-white">Explora</h3>
           <p> Nuestros mapas interactivos te brindarán una visión completa de las vías, senderos y caminos disponibles, permitiéndote planificar tus recorridos con precisión y confianza. </p>
         </div>
         <div class="feature col">
-            <img src="images/warningIcon.png" width="50px" height="50px"></img>
+            <img src="{{ url_for('static', filename='images/warningIcon.png') }}" width="50px" height="50px"></img>
           <h3 class="fs-2 text-white">Reporta</h3>
           <p>Nuestra plataforma te permite reportar y compartir información en tiempo real, lo que no solo te ayuda a ti, sino también a tus compañeros ciclistas.</p>
         </div>
         <div class="feature col">
-            <img src="images/commentIcon.png" width="50px" height="50px"></img>
+            <img src="{{ url_for('static', filename='images/commentIcon.png') }}" width="50px" height="50px"></img>
           <h3 class="fs-2 text-white">Comunicate</h3>
           <p> Te invitamos a unirte a nuestros canales de información y conectarte con otros apasionados por las dos ruedas. </p>
         </div>
