@@ -4,9 +4,9 @@ class Rutas(db.Model):
     __tablename__ = "Rutas"
 
     id_ruta = db.Column(db.Integer, primary_key = True)
-    id_user = db.Column(db.Integer, unique = True)
-    latitud = db.Column(db.Integer)
-    longitud = db.Column(db.Integer)
+    id_user = db.Column(db.Integer)
+    latitud = db.Column(db.Double)
+    longitud = db.Column(db.Double)
 
     def init(self, id_user, latitud, longitud):
         self.id_user = id_user

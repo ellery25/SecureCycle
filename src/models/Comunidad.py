@@ -14,4 +14,4 @@ with app.app_context():
 
 class ComunidadSchema(ma.Schema):
     class Meta:
-        fields = ['id_comunidad', 'nombre']
+        fields = ('id_comunidad', 'nombre')
