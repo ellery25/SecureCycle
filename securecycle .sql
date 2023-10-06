@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2023 a las 06:24:15
+-- Tiempo de generación: 06-10-2023 a las 08:16:32
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -35,6 +35,14 @@ CREATE TABLE `comments` (
   `content` varchar(180) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `comments`
+--
+
+INSERT INTO `comments` (`id_comments`, `id_usuario`, `id_comunidad`, `title`, `content`) VALUES
+(2, 4, 10, 'Calentura en barrios las flores', 'Erda'),
+(3, 1, 2, 'Erda', 'Erda');
+
 -- --------------------------------------------------------
 
 --
@@ -54,10 +62,18 @@ CREATE TABLE `comunidad` (
 
 CREATE TABLE `rutas` (
   `id_ruta` int(11) NOT NULL,
-  `id_user` int(11) DEFAULT NULL,
-  `latitud` int(11) DEFAULT NULL,
-  `longitud` int(11) DEFAULT NULL
+  `id_user` int(11) NOT NULL,
+  `latitud` double DEFAULT NULL,
+  `longitud` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `rutas`
+--
+
+INSERT INTO `rutas` (`id_ruta`, `id_user`, `latitud`, `longitud`) VALUES
+(1, 4, 12.23, 13.4123),
+(5, 3, 412.3213, 33.4324);
 
 -- --------------------------------------------------------
 
@@ -86,9 +102,7 @@ INSERT INTO `usuario` (`id`, `Email`, `Password`) VALUES
 -- Indices de la tabla `comments`
 --
 ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id_comments`),
-  ADD UNIQUE KEY `id_usuario` (`id_usuario`),
-  ADD UNIQUE KEY `id_comunidad` (`id_comunidad`);
+  ADD PRIMARY KEY (`id_comments`);
 
 --
 -- Indices de la tabla `comunidad`
@@ -100,8 +114,7 @@ ALTER TABLE `comunidad`
 -- Indices de la tabla `rutas`
 --
 ALTER TABLE `rutas`
-  ADD PRIMARY KEY (`id_ruta`),
-  ADD UNIQUE KEY `id_user` (`id_user`);
+  ADD PRIMARY KEY (`id_ruta`);
 
 --
 -- Indices de la tabla `usuario`
@@ -118,7 +131,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id_comments` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_comments` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `comunidad`
@@ -130,7 +143,7 @@ ALTER TABLE `comunidad`
 -- AUTO_INCREMENT de la tabla `rutas`
 --
 ALTER TABLE `rutas`
-  MODIFY `id_ruta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ruta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
