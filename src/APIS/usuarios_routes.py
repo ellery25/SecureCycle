@@ -16,12 +16,11 @@ def get_usuarios():
 def ingresar():
     email = request.form['email']
     password = request.form['password']
-    user = db.session.query(Usuario.id).filter(Usuario.Email == email, Usuario.Password == password).all()
-    resultado = UsuarioSchema.dump(user)
+    user = db.session.query(Usuario).filter(Usuario.Email == email, Usuario.Password == password).first()
 
-    if len(resultado)>0:
+    if user is not None:
         session['email'] = email
-        return redirect('/')
+        return render_template('mainPage.html')
     else:
         return 'Usuario no encontrado'
     

@@ -26,6 +26,10 @@ def sign_up():
 def login():
     return render_template('login.html')
 
+@app.route('/mainPage')
+def main():
+    return render_template('mainPage.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
