@@ -3,12 +3,8 @@ from flask import Flask, redirect, request, jsonify, json, session, render_templ
 from config.bd import app, db
 
 from APIS.usuarios_routes import users_routes
-from APIS.rutas_routes import rutas_routes
-from APIS.comments_routes import comments_routes
 
 app.register_blueprint(users_routes, url_prefix = '/usuarios')
-app.register_blueprint(rutas_routes, url_prefix = '/rutas')
-app.register_blueprint(comments_routes, url_prefix = '/comments')
 
 
 app.static_url_path = '/static'

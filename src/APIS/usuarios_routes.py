@@ -1,47 +1,65 @@
 from flask import jsonify, request, blueprints, redirect, jsonify, json, session, render_template
-from models.Usuarios import Usuario, UsuarioSchema, db
+from models.User import User, UserSchema, db
 
-users_routes = blueprints.Blueprint("usuarios", __name__)
+users_routes = blueprints.Blueprint("users", __name__)
 
 
 @users_routes.route('/get', methods = ['GET'])
 def get_usuarios():
-    resultall = Usuario.query.all()
-    schema = UsuarioSchema(many=True)
+    resultall = User.query.all()
+    schema = UserSchema(many=True)
     result = schema.dump(resultall)
     return jsonify(result)
 
 
+from flask import render_template
+
 @users_routes.route('/ingresar', methods=['POST'])
 def ingresar():
-    email = request.form['email']
+    # Obtén las credenciales del usuario desde la solicitud
+    login = request.form['email']  # Puede ser un correo electrónico o un nombre de usuario
     password = request.form['password']
-    user = db.session.query(Usuario).filter(Usuario.Email == email, Usuario.Password == password).first()
 
-    if user is not None:
-        session['email'] = email
+    # Busca al usuario por correo electrónico o nombre de usuario
+    user = db.session.query(User).filter((User.email == login) | (User.user == login)).first()
+
+    if user is not None and user.password == password:
+        session['user_id'] = user.user  # Guarda el ID del usuario en la sesión
         return render_template('mainPage.html')
     else:
-        return 'Usuario no encontrado'
+        return render_template('login.html', error_message='Usuario no encontrado o contraseña incorrecta')
+
+
     
 @users_routes.route('/registrar', methods=['POST'])
 def create_usuario():
     try:
+        user = request.form['user']
+        name = request.form['name']
         email = request.form['email']
         password = request.form['password']
-        
-        nuevo_usuario = Usuario(Email=email, Password=password)
+
+        # Verifica si el correo electrónico o el nombre de usuario ya están en uso
+        existing_email_user = User.query.filter((User.email == email) | (User.user == user)).first()
+        if existing_email_user:
+            return render_template('signUp.html', error_message='Usuario o correo ya en uso') 
+
+        # Crea un nuevo usuario
+        nuevo_usuario = User(user=user, name=name, email=email, password=password)
         db.session.add(nuevo_usuario)
         db.session.commit()
-        
-        return render_template('HomePage.html', usuario=nuevo_usuario)
+
+        return render_template('mainPage.html')  # Reemplaza 'mainPage.html' con tu plantilla principal
     except Exception as e:
-        return jsonify({"error": "Error al crear el usuario", "details": str(e)}), 400
+        return render_template('signUphtml')  # Reemplaza 'register.html' con tu plantilla de registro
+
+
+
     
-@users_routes.route('/put/<id>', methods=['PUT'])
-def update_usuario(id):
+@users_routes.route('/put/<user>', methods=['PUT'])
+def update_usuario(user):
     try:
-        usuario = Usuario.query.get(id)
+        usuario = User.query.get(user)
         if not usuario:
                 return jsonify({"error": "Usuario no encontrado"}), 404
 
@@ -60,7 +78,7 @@ def update_usuario(id):
 @users_routes.route('/delete/<id>', methods=['DELETE'])
 def delete_usuario(id):
     try:
-        usuario = Usuario.query.get(id)
+        usuario = User.query.get(id)
 
         if not usuario:
             return jsonify({"error": "Usuario no encontrado"}), 404
