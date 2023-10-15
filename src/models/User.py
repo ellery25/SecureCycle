@@ -9,6 +9,9 @@ class User(db.Model):
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(50))
 
+    posts = relationship('Post', back_populates='user')
+    routes = relationship('Route', back_populates='user')
+    alerts = relationship('Alert', back_populates='user')
 
     def __init__(self, user, name, email, password):  
         self.user = user
