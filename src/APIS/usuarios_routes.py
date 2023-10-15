@@ -25,7 +25,7 @@ def ingresar():
 
     if user is not None and user.password == password:
         session['user_id'] = user.user  # Guarda el ID del usuario en la sesión
-        return redirect('/mainPage', usuario = user)
+        return redirect('/mainPage')
     else:
         return redirect('/login', error_message='Usuario no encontrado o contraseña incorrecta')
 
@@ -49,7 +49,7 @@ def create_usuario():
         db.session.add(nuevo_usuario)
         db.session.commit()
 
-        return redirect('/mainPage', usuario = nuevo_usuario)  # Reemplaza 'mainPage.html' con tu plantilla principal
+        return redirect('/mainPage')  # Reemplaza 'mainPage.html' con tu plantilla principal
     except Exception as e:
         return redirect('/signUp')  # Reemplaza 'register.html' con tu plantilla de registro
 
