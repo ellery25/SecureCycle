@@ -27,7 +27,10 @@ def ingresar():
         session['user_id'] = user.user  # Guarda el ID del usuario en la sesión
         return redirect('/mainPage')
     else:
-        return redirect('/login', error_message='Usuario no encontrado o contraseña incorrecta')
+        error_message = 'Usuario no encontrado o contraseña incorrecta'
+        return redirect('/login?error_message=' + error_message)
+
+
 
 
     

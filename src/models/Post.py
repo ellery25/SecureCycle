@@ -26,5 +26,5 @@ with app.app_context():
 
 class PostSchema(ma.Schema):
     class Meta:
-        fields = ('user_id', 'title', 'content', 'image', 'date')
+        fields = ('user_id', 'title', 'content','date')
 

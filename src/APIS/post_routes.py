@@ -7,8 +7,11 @@ posts_routes = blueprints.Blueprint("posts", __name__)
 #------------------GET----------------------
 @posts_routes.route('/getPost', methods=['GET'])
 def getPosts():
-    posts = Post.query.all()
-    return jsonify(PostSchema.dump(posts))
+    try:
+        posts = Post.query.all()
+        return PostSchema(many=True).dump(posts), 200
+    except Exception as e:
+        return jsonify({"error": "Error al obtener los posts", "details": str(e)}), 500
 
 #-----------------POST----------------------
 @posts_routes.route('/addPost', methods=['POST'])

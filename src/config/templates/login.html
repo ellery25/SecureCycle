@@ -2,11 +2,11 @@
 
 {% block content %}
 
-{% if error_message %}
-    <div class="alert alert-danger">
-        {{ error_message }}
-    </div>
-    {% endif %} 
+{% if request.args.get('error_message') %}
+<div class="alert alert-danger">
+    {{ request.args.get('error_message') }}
+</div>
+{% endif %}
     
 <div class="container col-xl-10 col-xxl-8 px-4 py-5">
     <div class="row align-items-center g-lg-5 py-5">
