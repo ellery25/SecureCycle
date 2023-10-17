@@ -7,7 +7,7 @@ alert_routes = blueprints.Blueprint("alerts", __name__)
 @alert_routes.route('/getAlerts', methods=['GET'])
 def getAlerts():
     alerts = Alert.query.all()
-    return jsonify(AlertSchema.dump(alerts))
+    return jsonify(AlertSchema(many=True).dump(alerts))
 
 #-----------------POST-----------------------
 @alert_routes.route('/addAlert', methods = ['POSt'])

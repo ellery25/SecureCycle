@@ -7,7 +7,14 @@
     <!-- Aquí se mostrarán las tarjetas de los posts -->
 </div>
 
+<div id="alert-cards-container" class="row"></div>
+
+<form action="/usuarios/logout" method="get">
+    <button type="submit">Cerrar Sesión</button>
+  </form>
+
 <script src="{{ url_for('static', filename='js/getPosts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/getAlerts.js') }}"></script>
 
 
 {% endblock %}

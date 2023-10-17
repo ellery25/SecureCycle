@@ -16,11 +16,15 @@ from flask import render_template
 
 @users_routes.route('/ingresar', methods=['POST'])
 def ingresar():
-    # Obtén las credenciales del usuario desde la solicitud
+    # Verifica si ya hay una sesión iniciada
+    if 'user_id' in session:
+        # El usuario ya tiene una sesión activa, redirige a la página principal o a donde desees
+        return redirect('/mainPage')
+    
+    # Si no hay una sesión iniciada, continúa con el proceso de inicio de sesión
     login = request.form['email']  # Puede ser un correo electrónico o un nombre de usuario
     password = request.form['password']
-
-    # Busca al usuario por correo electrónico o nombre de usuario
+    
     user = db.session.query(User).filter((User.email == login) | (User.user == login)).first()
 
     if user is not None and user.password == password:
@@ -56,7 +60,15 @@ def create_usuario():
     except Exception as e:
         return redirect('/signUp')  # Reemplaza 'register.html' con tu plantilla de registro
 
-
+@users_routes.route('/logout')
+def logout():
+    # Verifica si hay una sesión activa
+    if 'user_id' in session:
+        # Elimina la sesión
+        session.pop('user_id', None)
+    
+    # Redirige al usuario a la página de inicio de sesión u otra página, como la principal
+    return redirect('/login')  # Cambia '/login' por la página a la que desees redirigir
 
     
 @users_routes.route('/put/<user>', methods=['PUT'])
