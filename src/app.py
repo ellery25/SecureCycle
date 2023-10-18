@@ -35,6 +35,9 @@ def login():
 def main():
     return render_template('mainPage.html')
 
+@app.route('/configuration')
+def config():
+    return render_template('Configuracion.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

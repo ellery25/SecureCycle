@@ -11,8 +11,21 @@ def get_usuarios():
     result = schema.dump(resultall)
     return jsonify(result)
 
+@users_routes.route('/getUser', methods=['GET'])
+def get_usuario():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user = User.query.filter_by(user=user_id).first()
 
-from flask import render_template
+        if user is not None:
+            schema = UserSchema()
+            result = schema.dump(user)
+            return jsonify(result)
+        else:
+            return jsonify({"error": "Usuario no encontrado"}), 404
+    else:
+        return jsonify({"error": "No hay usuario en sesión"}), 401
+
 
 @users_routes.route('/ingresar', methods=['POST'])
 def ingresar():
