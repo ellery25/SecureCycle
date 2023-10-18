@@ -9,16 +9,14 @@ class Post(db.Model):
     user_id = db.Column(db.String(30), ForeignKey('User.user'))
     title = db.Column(db.String(50))
     content = db.Column(db.String(255))
-    image = db.Column(db.LargeBinary)
     date = db.Column(db.DateTime)
 
     user = relationship('User', back_populates='posts')
 
-    def __init__(self, user_id, title, content, image, date):
+    def __init__(self, user_id, title, content, date):
         self.user_id = user_id
         self.title = title
         self.content = content
-        self.image = image
         self.date = date
 
 with app.app_context():

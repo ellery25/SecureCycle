@@ -1,6 +1,8 @@
 from flask import Flask, redirect, request, jsonify, json, session, render_template
 
 from config.bd import app, db
+import googlemaps
+import os
 
 from APIS.usuarios_routes import users_routes
 from APIS.alert_routes import alert_routes

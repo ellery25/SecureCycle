@@ -1,6 +1,6 @@
 from flask import jsonify, request, blueprints, redirect, jsonify, json, session, render_template
 from models.Route import Route, RouteSchema, db
-
+import googlemaps
 route_routes = blueprints.Blueprint("routes", __name__) 
 
 #------------------GET----------------------
@@ -20,6 +20,16 @@ def addRoute():
         return RouteSchema.jsonify(Route(**data)), 201
     except Exception as e:
         return jsonify({"error": "Error al crear el comentario", "details": str(e)}), 400
+
+@route_routes.route('/get_directions', methods=['POST'])
+def get_directions():
+    origin = request.form['origin']
+    destination = request.form['destination']
+
+    directions = googlemaps.directions(origin, destination)
+
+    return jsonify(directions)
+
 
 #-------PUT-----------
 @route_routes.route('/put/<id>', methods=['PUT'])

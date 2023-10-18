@@ -7,37 +7,22 @@ function getAndDisplayPosts() {
       posts.forEach((post) => {
         // Crear elementos HTML para cada post
         const card = document.createElement("div");
-        card.className = "card";
+        card.className = "card mb-3"; // Agrega la clase 'card' y ajusta según tus necesidades
 
-        const cardContent = document.createElement("div");
-        cardContent.className = "card-content";
-
-        const cardTitle = document.createElement("h2");
-        cardTitle.textContent = post.title;
-        cardTitle.className = "card-title";
-
-        const cardUser = document.createElement("h3");
-        cardUser.textContent = post.user_id;
-        cardUser.className = "card_user";
-
-        const cardDate = document.createElement("p");
-        cardDate.textContent = `Publicado el: ${post.date}`;
-        cardDate.className = "card-date";
-
-        const cardContentText = document.createElement("p");
-        cardContentText.textContent = post.content;
-        cardContentText.className = "card-content-text";
+        // Contenido de la tarjeta
+        card.innerHTML = `
+          <div class="card-body">
+            <h5 class="card-title">${post.title}</h5>
+            <p class="card-text">${post.content}</p>
+          </div>
+          <div class="card-footer text-muted">
+            Usuario: ${post.user_id} | Publicado el: ${new Date(post.date).toDateString()}
+          </div>
+        `;
 
         // Agregar elementos al DOM
-        cardContent.appendChild(cardTitle);
-        cardContent.appendChild(cardUser);
-        cardContent.appendChild(cardDate);
-        cardContent.appendChild(cardContentText);
-        card.appendChild(cardContent);
         postContainer.appendChild(card);
       });
-
-      // ...
     })
     .catch((error) => {
       console.error("Error al obtener los posts:", error);

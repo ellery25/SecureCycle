@@ -2,17 +2,119 @@
 
 {% block content %} 
 
-<h1>Lista de Posts</h1>
-<div id="post-container">
-    <!-- Aquí se mostrarán las tarjetas de los posts -->
-</div>
 
-<div id="alert-cards-container" class="row"></div>
+<html data-bs-theme="dark">
+  <div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom ">
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+          <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        </a>
+      </div>
+  
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><img src="{{url_for('static', filename='images/bike-icon.png')}}" alt="bike-icon" width="40px" height="40px" ></li>
+        <li><a href="#" class="nav-link px-2">Reportes</a></li>
+        <li><a href="#" class="nav-link px-2">Alertas</a></li>
+        <li><a href="#" class="nav-link px-2">Rutas</a></li>
+        <li><a href="#" class="nav-link px-2">Configuracion</a></li>
+      </ul>
+  
+      <div class="col-md-3 text-end">
+        <form action="/usuarios/logout" method="get">
+          <button class="btn btn-primary" type="submit">Cerrar Sesión</button>
+        </form>
+      </div>
+    </header>
+  </div>
+  <div class="container">
+    <div class="row">
+      <section class="col-8">
+        <div class="container">
+          <h3>  Escucha a la comunidad</h3>
+        </div>
+        <div id ="post-container">
 
-<form action="/usuarios/logout" method="get">
-    <button type="submit">Cerrar Sesión</button>
-  </form>
-
+        </div>
+      </section>
+      <section class="col-4">
+        <div class="container"><h4>Alertas:</h4></div>
+        <div class="list-group">
+          <div id ="alert-list-container">
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="container">
+      <div class="button-container">
+        <button class="fixed-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#subirPost" data-bs-whatever="@getbootstrap">Subir Post</button>
+        <button class="fixed-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#subirAlerta" data-bs-whatever="@getbootstrap">Hacer una Alerta</button>
+      </div>
+    </div>
+    <div class="modal fade" id="subirPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Post</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="/posts/addPost" method="POST">
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Title:</label>
+                <input type="text" class="form-control" id="recipient-name" name="title">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Content:</label>
+                <textarea class="form-control" id="message-text" name="content"></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Subir Post</button>
+              </div>
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="subirAlerta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nueva Alerta</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="/alerts/addAlert" method="POST">
+              <div class="mb-3" >
+                <label for="recipient-name" class="col-form-label">Tipo de alerta:</label>
+                <select class="form-select form-select-sm" aria-label="Small select example" name="type">
+                  <option selected>Selecciona el tipo de alerta</option>
+                  <option value="Seguridad">Seguridad</option>
+                  <option value="Vias en mal estado">Vias en mal estado</option>
+                  <option value="Climatologica">Climatologica</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Dirección:</label>
+                <input type="text" class="form-control" id="recipient-name" name="direction">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Description:</label>
+                <textarea class="form-control" id="message-text" name="description" ></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Enviar Alerta</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </html>
+  
 <script src="{{ url_for('static', filename='js/getPosts.js') }}"></script>
 <script src="{{ url_for('static', filename='js/getAlerts.js') }}"></script>
 

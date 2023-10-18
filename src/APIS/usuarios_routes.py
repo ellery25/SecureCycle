@@ -55,7 +55,7 @@ def create_usuario():
         nuevo_usuario = User(user=user, name=name, email=email, password=password)
         db.session.add(nuevo_usuario)
         db.session.commit()
-
+        session['user_id'] = user
         return redirect('/mainPage')  # Reemplaza 'mainPage.html' con tu plantilla principal
     except Exception as e:
         return redirect('/signUp')  # Reemplaza 'register.html' con tu plantilla de registro

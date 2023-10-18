@@ -16,3 +16,25 @@
 .card-content-text {
   margin-top: 10px;
 }
+
+/* Estilos para el contenedor de botones en la parte inferior */
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  position: fixed;
+  bottom: 0;
+  left: 9%;
+  padding: 20px;
+  z-index: 1; /* Para que los botones estén por encima del contenido */
+}
+
+.fixed-button {
+  margin-right: 10px; /* Espacio entre los botones */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

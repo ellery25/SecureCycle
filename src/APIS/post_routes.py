@@ -1,5 +1,6 @@
 from flask import jsonify, request, blueprints, redirect, jsonify, json, session, render_template
 from models.Post import Post, PostSchema, db
+from datetime import datetime 
 
 posts_routes = blueprints.Blueprint("posts", __name__)
 
@@ -17,13 +18,27 @@ def getPosts():
 @posts_routes.route('/addPost', methods=['POST'])
 def addPost():
     try:
-        data = request.get_json()
-        db.session.add(Post(**data))
+        # Obtiene los datos del formulario en lugar de JSON
+        title = request.form['title']
+        content = request.form['content']
+        
+        # Obtiene el user_id de la sesión
+        user_id = session.get('user_id')
+
+        # Obtiene la fecha actual
+        date = datetime.now()
+
+        # Crea una instancia del modelo Post con los datos obtenidos
+        new_post = Post(user_id=user_id, title=title, content=content, date=date)
+
+        # Agrega el nuevo post a la base de datos
+        db.session.add(new_post)
         db.session.commit()
 
-        return PostSchema.jsonify(Post(**data)), 201
+        return redirect('/mainPage')
     except Exception as e:
         return jsonify({"error": "Error al crear el comentario", "details": str(e)}), 400
+
 
 #-------PUT-----------
 @posts_routes.route('/put/<id>', methods=['PUT'])
