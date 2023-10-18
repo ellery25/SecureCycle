@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block content %} 
+
+<header class="p-3 text-bg-dark">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="{{ url_for('main') }}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <img src="{{ url_for('static', filename='images/bike-icon.png') }}" width="50px" height="50px" alt="Mi imagen">
+        </a>
+  
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2 text-secondary">SecureCycle</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-lg-5 py-5">
+      <div class="col-md-10 mx-auto col-lg-5">
+        <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary" action="/routes/addRoute" method="POST">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" name="initLocation">
+            <label for="floatingInput">Initial Location</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingPassword" name="endLocation">
+            <label for="floatingPassword">Final Location</label>
+          </div>
+          <div class="form-floating mb-3">
+            <div class="form-group">
+                <label for="fecha">Selecciona una fecha:</label>
+                <input type="date" class="form-control" id="fecha" name="fecha">
+              </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingPassword" name="titleRoute">
+            <label for="floatingPassword">Encabezado</label>
+          </div>
+          <div class="form-floating mb-3">
+            <textarea class="form-control" id="message-text" name="description"></textarea>
+            <label for="message-text">Descripción:</label>
+          </div>
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Postear Ruta</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

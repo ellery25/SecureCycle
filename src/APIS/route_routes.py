@@ -7,19 +7,37 @@ route_routes = blueprints.Blueprint("routes", __name__)
 @route_routes.route('/getRoute', methods=['GET'])
 def getRoute():
     routes = Route.query.all()
-    return jsonify(RouteSchema.dump(routes))
+    return jsonify(RouteSchema(many=True).dump(routes))
 
 #-----------------POST-----------------------
-@route_routes.route('/addRoute', methods = ['POSt'])
+from datetime import datetime  # Asegúrate de importar datetime
+
+@route_routes.route('/addRoute', methods=['POST'])
 def addRoute():
     try:
-        data = request.get_json()
-        db.session.add(Route(**data))
+        # Obtiene los datos del formulario
+        user_id = session.get('user_id')  # Toma el user_id de la sesión
+        initialLocation = request.form['initLocation']
+        finalLocation = request.form['endLocation']
+        title = request.form.get('titleRoute')
+        description = request.form.get('description')
+        
+        # Obtiene la fecha del formulario
+        creationDate = request.form.get('fecha')
+
+        # Crea una instancia del modelo Route con los datos obtenidos
+        new_route = Route(user_id=user_id, initialLocation=initialLocation, finalLocation=finalLocation, 
+                          title=title, description=description, creationDate=creationDate)
+
+        # Agrega la nueva ruta a la base de datos
+        db.session.add(new_route)
         db.session.commit()
 
-        return RouteSchema.jsonify(Route(**data)), 201
+        return redirect('/mainPage')
     except Exception as e:
-        return jsonify({"error": "Error al crear el comentario", "details": str(e)}), 400
+        return jsonify({"error": "Error al crear la ruta", "details": str(e)}), 400
+
+
 
 @route_routes.route('/get_directions', methods=['POST'])
 def get_directions():

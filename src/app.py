@@ -1,5 +1,7 @@
 from flask import Flask, redirect, request, jsonify, json, session, render_template
 
+from models.User import User, UserSchema, db
+
 from config.bd import app, db
 import googlemaps
 import os
@@ -29,7 +31,10 @@ def sign_up():
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    if 'user_id' in session:
+        return redirect('/mainPage')
+    else:
+        return render_template('login.html')
 
 @app.route('/mainPage')
 def main():
@@ -38,6 +43,10 @@ def main():
 @app.route('/configuration')
 def config():
     return render_template('Configuracion.html')
+
+@app.route('/routesPage')
+def createRoute():
+    return render_template('Routes.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

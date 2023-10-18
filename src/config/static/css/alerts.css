@@ -1,3 +1,13 @@
 .list-group-item {
     word-wrap: break-word;
 }
+
+#alert-list-container {
+    max-height: 300px; /* Establece la altura máxima para el contenedor */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando sea necesario */
+  }
+
+#route-list-container{
+    max-height: 300px; /* Establece la altura máxima para el contenedor */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando sea necesario */
+  }

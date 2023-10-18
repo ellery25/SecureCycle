@@ -15,7 +15,7 @@ class Route(db.Model):
 
     user = relationship('User', back_populates='routes')
 
-    def init(self, user_id, initialLocation, finalLocation, creationDate, title, description):
+    def __init__(self, user_id, initialLocation, finalLocation, creationDate, title, description):
         self.user_id = user_id
         self.initialLocation = initialLocation
         self.finalLocation = finalLocation
